@@ -33,20 +33,16 @@ class flickr_api_cralwer():
         flickr = FlickrAPI(self.key, self.secret, format="parsed-json")
         result = flickr.photos.search(
             text = character,
-            per_page = 10,
+            per_page = 500,
             media = "photos",
             sort = "relevance",
-            safe_search = 1,
-            extras = "url_c"
-            #url_cが存在しない画像が複数ある。サイズ指定せず取得する方法があるか調べる必要がある。
+            safe_search = 1
         )
+
         for item in result["photos"]["photo"]:
-            url = item["url_c"]
+            url = "https://live.staticflickr.com/{0}/{1}_{2}.jpg".format(item["server"],item["id"],item["secret"])
             filepath = savepath + "/" + item["id"] + ".jpg"
             if os.path.exists(filepath):
                 continue
             urlretrieve(url, filepath)
             time.sleep(wait_time)
-
-test = flickr_api_cralwer()
-test.get_images("jigglypuff")
