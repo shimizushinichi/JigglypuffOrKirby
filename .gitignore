@@ -1,1 +1,3 @@
-crawler/
+crawler/google
+crawler/flickr/flickrAPIkey.json
+crawler/flickr/downloads/
