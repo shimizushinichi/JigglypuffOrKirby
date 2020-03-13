@@ -1,4 +1,4 @@
-class flickr_api_cralwer():
+class ImageCrawler():
     def __init__(self):
         """flickrで使用するAPIKeyを同ディレクトリのファイルから読み込みます。
         同ディレクトリにflickrAPIkey.jsonというファイルを用意してください。
