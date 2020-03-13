@@ -13,7 +13,7 @@ class ImageCrawler():
 
     def get_images(self, character,savedir="downloads"):
         """flickrからAPIで画像を取得して保存します。
-        画像の保存先は./savedir/characterとなります。
+        画像の保存先は./savedir/flickr/characterとなります。
 
         Args:
             character(int):検索キーワード。jigglypuffかkirby
@@ -24,7 +24,7 @@ class ImageCrawler():
         import os, time, sys
 
         wait_time = 1
-        savepath = savedir+"/"+character
+        savepath = savedir+"/flickr/"+character
         try:
             os.makedirs(savepath)
         except FileExistsError:
