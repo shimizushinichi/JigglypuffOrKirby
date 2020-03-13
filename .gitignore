@@ -1,4 +1,4 @@
 __pycache__/
 crawler/google
-crawler/flickr/flickrAPIkey.json
-crawler/flickr/downloads/
+flickrAPIkey.json
+downloads/

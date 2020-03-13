@@ -1,9 +1,9 @@
 class ImageCrawler():
     def __init__(self):
         """flickrで使用するAPIKeyを同ディレクトリのファイルから読み込みます。
-        同ディレクトリにflickrAPIkey.jsonというファイルを用意してください。
+        JigglypuffOrKirby.pyと同じディレクトリに
+        flickrAPIkey.jsonというファイルを用意してください。
         APIKeyはhttps://www.flickr.com/services/api/のAPI Keysから取得してください。
-
         """
         import json
         with open("flickrAPIkey.json") as f:
