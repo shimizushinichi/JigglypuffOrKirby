@@ -2,3 +2,6 @@ __pycache__/
 crawler/google
 flickrAPIkey.json
 downloads/
+trimmer_checked/
+*.h5
+
