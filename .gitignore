@@ -5,3 +5,4 @@ downloads/
 trimmer_checked/
 *.h5
 augmented/
+resized/
