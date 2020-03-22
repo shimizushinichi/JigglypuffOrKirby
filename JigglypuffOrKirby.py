@@ -4,9 +4,11 @@ import os
 import importlib
 
 def user_input():
+    list_type = lambda x:list(x.split(","))
+
     parser = argparse.ArgumentParser(description="JigglypuffOrKirbyの各種機能を実行するためのプログラムです。")
 
-    parser.add_argument("func", help="crawler, trimming, augmentation, learn, or judge", type=str, choices=["crawler", "trimming", "augmentation", "resize", "learn", "judge"])
+    parser.add_argument("func", help="crawler, trimming, augmentation, learn, or judge", type=str, choices=["crawler", "trimming", "augmentation", "resize", "numpy_convert", "learn", "judge"])
     parser.add_argument("-s", "--site", help="website to crawl", type=str, default = "flickr", choices=["flickr"])
     parser.add_argument("-ch", "--character", help="Search word", type=str)
     parser.add_argument("-im", "--images_folder_path", help="The path of image's folder", type=str)
@@ -14,6 +16,9 @@ def user_input():
     parser.add_argument("-out", "--output", help="output folder path", type=str, default = "augmented")#なくていい気がしてきた
     parser.add_argument("-wid", "--width",help="width for output image", type=int)
     parser.add_argument("-hei", "--height",help="height for output image", type=int)
+    parser.add_argument("-indirs", "--inputdirs", help="Image folders. should be comma separated. e.g /aaa/bbb,ccc/ddd", type=list_type)
+    # parser.add_argument("", "", help="", type=str)
+    # parser.add_argument("", "", help="", type=str)
     # parser.add_argument("", "", help="", type=str)
 
     args_namespace = parser.parse_args()
@@ -48,6 +53,13 @@ def run_resizer(input_dir, width, height):
     resizer_module = importlib.import_module(import_file)
     resizer_module.resizer(input_dir, width, height)
 
+def run_numpy_converter(input_dirs):
+    for input_dir in input_dirs:
+        assert os.path.isdir(input_dir), "-indirsに指定されたディレクトリが見つかりません。input:{}".format(input_dir)
+    import_file = "numpy_convert.numpy_converter"
+    resizer_module = importlib.import_module(import_file)
+    resizer_module.numpy_converter(input_dirs)
+
 def main():
     arguments = user_input()
     if arguments["func"] == "crawler":
@@ -61,6 +73,9 @@ def main():
 
     elif arguments["func"] == "resize":
         run_resizer(arguments["input"], arguments["width"], arguments["height"])
+
+    elif arguments["func"] == "numpy_convert":
+        run_numpy_converter(arguments["inputdirs"])
     # elif arguments["func"] == "learn":
     # elif arguments["func"] == "judge":
 
