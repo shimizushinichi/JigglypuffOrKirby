@@ -26,7 +26,7 @@ def categorizer(input_dirs):
         categorized_file_list_tmp = []
         for img_dir in file_list:
             _, ext = os.path.splitext(img_dir)
-            if ext == ".png" or ".jpg" or ".jpeg":
+            if ext in {".png", ".jpg", ".jpeg"}:
                 img_dir_path = input_dir + "/" + img_dir
                 categorized_file_list_tmp.append((category_num, img_dir_path))
         categorized_file_list.append(categorized_file_list_tmp)

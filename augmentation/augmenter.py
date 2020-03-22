@@ -11,7 +11,7 @@ def augmenter(input_dir, output_dir, character):
     file_list = os.listdir(input_dir)
     for file_name in file_list:
         basename, ext = os.path.splitext(file_name)
-        if ext == ".png" or ".jpg" or ".jpeg":
+        if ext in {".png", ".jpg", ".jpeg"}:
             img = Image.open(input_dir + "/" + file_name)
 
             # 90度ずつ回転させて画像を保存する。

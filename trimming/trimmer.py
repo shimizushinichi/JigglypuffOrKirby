@@ -20,16 +20,18 @@ def trimmer(images_folder_path, character):
     filepaths = glob.glob(input_dir+"/*")
 
     for filepath in filepaths:
-        image = Image.open(filepath)
-        detected_result_list = yolo.detect_image(image)
-        filename = os.path.basename(filepath)
+        basename, ext = os.path.splitext(filepath)
+        if ext in {".png", ".jpg", ".jpeg"}:
+            image = Image.open(filepath)
+            detected_result_list = yolo.detect_image(image)
+            filename = os.path.basename(filepath)
 
-        if detected_result_list == []:
-            image.save(untrimmed_savepath+"/"+filename)
-        else:
-            for idx, coordinate in enumerate(detected_result_list):
-                trimmed_image = image.crop((coordinate["left"], coordinate["top"], coordinate["right"], coordinate["bottom"]))
-                trimmed_image.save(trimmed_savepath+"/trimmed_"+str(idx)+"_"+filename)
+            if detected_result_list == []:
+                image.save(untrimmed_savepath+"/"+filename)
+            else:
+                for idx, coordinate in enumerate(detected_result_list):
+                    trimmed_image = image.crop((coordinate["left"], coordinate["top"], coordinate["right"], coordinate["bottom"]))
+                    trimmed_image.save(trimmed_savepath+"/trimmed_"+str(idx)+"_"+filename)
 
 def get_modelpath(character):
     # trimming/trained_weights_final_jigglypuff.h5になっちゃってる

@@ -15,7 +15,7 @@ def resizer(input_dir, width, height):
     file_list = os.listdir(input_dir)
     for file_name in file_list:
         basename, ext = os.path.splitext(file_name)
-        if ext == ".png" or ".jpg" or ".jpeg":
+        if ext in {".png", ".jpg", ".jpeg"}:
             img = Image.open(input_dir + "/" + file_name)
             #画像を指定されたサイズに変更する。
             img = img.resize(size, Image.LANCZOS)
