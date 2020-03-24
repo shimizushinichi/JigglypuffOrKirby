@@ -21,7 +21,7 @@ def categorizer(input_dirs):
         #カテゴリ名を数字に変換する。
         category_num = convert_category_to_num(category_name)
         # input_dir内の画像ファイル一覧を取得
-        file_list = os.listdir(input_dir)#ここパス含めて出したいのにファイル名だけになっててエラーになる。
+        file_list = os.listdir(input_dir)
         # 拡張子を確認した上で、(カテゴリ名、ファイルパス)を配列に格納する。
         categorized_file_list_tmp = []
         for img_dir in file_list:
@@ -92,7 +92,6 @@ def create_numpied_data(X_train, X_test, Y_train, Y_test):
      "{}_{}".format(size[0],size[1]) + "_{0:%Y%m%d%H%M}".format(now) +".npy"
 
     pickle_dump(xy, output_dir + "/" + numpied_file_name)
-    # np.save(output_dir + "/" + numpied_file_name, xy)
 
 def numpy_converter(input_dirs):
     categorized_file_list = categorizer(input_dirs)
