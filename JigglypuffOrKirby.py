@@ -8,7 +8,8 @@ def user_input():
 
     parser = argparse.ArgumentParser(description="JigglypuffOrKirbyの各種機能を実行するためのプログラムです。")
 
-    parser.add_argument("func", help="crawler, trimming, augmentation, learn, or judge", type=str, choices=["crawler", "trimming", "augmentation", "resize", "numpy_convert", "learn", "judge"])
+    parser.add_argument("func", help="crawler, trimming, augmentation, learn, or judge", type=str,
+        choices=["crawler", "trimming", "augmentation", "resize", "numpy_convert", "testdata_convert", "learn", "judge"])
     parser.add_argument("-s", "--site", help="website to crawl", type=str, default = "flickr", choices=["flickr"])
     parser.add_argument("-ch", "--character", help="Search word", type=str)
     parser.add_argument("-im", "--images_folder_path", help="The path of image's folder", type=str)
@@ -57,8 +58,15 @@ def run_numpy_converter(input_dirs):
     for input_dir in input_dirs:
         assert os.path.isdir(input_dir), "-indirsに指定されたディレクトリが見つかりません。input:{}".format(input_dir)
     import_file = "numpy_convert.numpy_converter"
-    resizer_module = importlib.import_module(import_file)
-    resizer_module.numpy_converter(input_dirs)
+    numpy_converter_module = importlib.import_module(import_file)
+    numpy_converter_module.numpy_converter(input_dirs)
+
+def run_testdata_converter(input_dirs):
+    for input_dir in input_dirs:
+        assert os.path.isdir(input_dir), "-indirsに指定されたディレクトリが見つかりません。input:{}".format(input_dir)
+    import_file = "testdata_convert.testdata_converter"
+    testdata_converter_module = importlib.import_module(import_file)
+    testdata_converter_module.testdata_converter(input_dirs)
 
 def main():
     arguments = user_input()
@@ -76,6 +84,9 @@ def main():
 
     elif arguments["func"] == "numpy_convert":
         run_numpy_converter(arguments["inputdirs"])
+
+    elif arguments["func"] == "testdata_convert":
+        run_testdata_converter(arguments["inputdirs"])
     # elif arguments["func"] == "learn":
     # elif arguments["func"] == "judge":
 
