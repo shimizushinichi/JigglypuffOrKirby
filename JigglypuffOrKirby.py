@@ -42,13 +42,14 @@ def run_augmenter(input_dir):
     augmenter_module = importlib.import_module(import_file)
     augmenter_module.augmenter(input_dir)
 
-def run_resizer(input_dir, width, height):
-    assert os.path.isdir(input_dir), "-inに指定されたディレクトリが見つかりません。input:{}".format(input_dir)
+def run_resizer(input_dirs, width, height):
+    for input_dir in input_dirs:
+        assert os.path.isdir(input_dir), "-indirsに指定されたディレクトリが見つかりません。input:{}".format(input_dir)
     assert width, "-widが空白か無効な値になっています。input:{}".format(width)
     assert height, "-heiが空白か無効な値になっています。input:{}".format(height)
     import_file = "resize.resizer"
     resizer_module = importlib.import_module(import_file)
-    resizer_module.resizer(input_dir, width, height)
+    resizer_module.resizer(input_dirs, width, height)
 
 def run_numpy_converter(input_dirs):
     for input_dir in input_dirs:
@@ -77,7 +78,7 @@ def main():
         run_augmenter(arguments["input"])
 
     elif arguments["func"] == "resize":
-        run_resizer(arguments["input"], arguments["width"], arguments["height"])
+        run_resizer(arguments["inputdirs"], arguments["width"], arguments["height"])
 
     elif arguments["func"] == "numpy_convert":
         run_numpy_converter(arguments["inputdirs"])
