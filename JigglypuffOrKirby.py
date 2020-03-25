@@ -70,6 +70,7 @@ def run_testdata_converter(input_dirs):
 
 def main():
     arguments = user_input()
+    t0 = time.time() # start the timer
     if arguments["func"] == "crawler":
         run_crawler(arguments["site"], arguments["character"])
 
@@ -89,6 +90,10 @@ def main():
         run_testdata_converter(arguments["inputdirs"])
     # elif arguments["func"] == "learn":
     # elif arguments["func"] == "judge":
+
+    t1 = time.time() # stop the timer
+    total_time = t1 - t0
+    print("Total time:" + str(total_time) + " Seconds")
 
 if __name__ == "__main__":
     main()
