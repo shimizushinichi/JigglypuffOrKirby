@@ -16,8 +16,12 @@ def categorizer(input_dirs):
 
     for input_dir in input_dirs:
         # カテゴリ名はフォルダ名から抽出する。
-        # /resized/jigglypuff/256_256 -> jigglypuffとなる。256_256ではないので注意。
-        category_name = os.path.basename(os.path.dirname(input_dir))
+        # /resized/224_224/jigglypuff/ -> jigglypuffとなる。
+        # もし末尾が/で終わる形で入力されたら取り除く。
+        if input_dir[-1] == "/":
+            input_dir = input_dir[:-1]
+        # 例えばinput_dir = augmented/jigglypuffなら、category_name = jigglypuff
+        category_name = os.path.basename(input_dir)
         #カテゴリ名を数字に変換する。
         category_num = convert_category_to_num(category_name)
         # input_dir内の画像ファイル一覧を取得
