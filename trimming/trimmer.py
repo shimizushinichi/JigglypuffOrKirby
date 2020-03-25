@@ -2,9 +2,13 @@ from .keras_yolo3.yolo import YOLO
 from PIL import Image
 import os, glob
 
-def trimmer(images_folder_path, character):
-    trimmed_savepath = "trimmer_checked/"+character+"/trimmed"
-    untrimmed_savepath = "trimmer_checked/"+character+"/untrimmed"
+def trimmer(input_dir):
+    if input_dir[-1] == "/":
+        input_dir = input_dir[:-1]
+    character = os.path.basename(input_dir)
+
+    trimmed_savepath = "trimmer_checked/" + "trimmed/" + character
+    untrimmed_savepath = "trimmer_checked/" + "untrimmed/" + character
     try:
         os.makedirs(trimmed_savepath)
         os.makedirs(untrimmed_savepath)
@@ -16,7 +20,6 @@ def trimmer(images_folder_path, character):
     anchors_path = get_anchors_path()
     yolo = YOLO(model_path=model_path, classes_path=classes_path, anchors_path=anchors_path)
 
-    input_dir = images_folder_path
     filepaths = glob.glob(input_dir+"/*")
 
     for filepath in filepaths:
@@ -34,7 +37,6 @@ def trimmer(images_folder_path, character):
                     trimmed_image.save(trimmed_savepath+"/trimmed_"+str(idx)+"_"+filename)
 
 def get_modelpath(character):
-    # trimming/trained_weights_final_jigglypuff.h5になっちゃってる
     model_name = "trained_weights_final_{}.h5".format(character)
     model_path = os.path.join(os.path.dirname(__file__), "keras_yolo3", "weights", model_name)
 
