@@ -14,7 +14,6 @@ def user_input():
     parser.add_argument("-ch", "--character", help="Search word", type=str)
     parser.add_argument("-im", "--images_folder_path", help="The path of image's folder", type=str)
     parser.add_argument("-in", "--input", help="input folder path", type=str)
-    parser.add_argument("-out", "--output", help="output folder path", type=str, default = "augmented")#なくていい気がしてきた
     parser.add_argument("-wid", "--width",help="width for output image", type=int)
     parser.add_argument("-hei", "--height",help="height for output image", type=int)
     parser.add_argument("-indirs", "--inputdirs", help="Image folders. should be comma separated. e.g /aaa/bbb,ccc/ddd", type=list_type)
@@ -39,12 +38,11 @@ def run_trimmer(images_folder_path, character):
     trimmer_module = importlib.import_module(import_file)
     trimmer_module.trimmer(images_folder_path, character)
 
-def run_augmenter(input_dir, output_dir, character):
+def run_augmenter(input_dir):
     assert os.path.isdir(input_dir), "-inに指定されたディレクトリが見つかりません。input:{}".format(input_dir)
-    assert character, "-chが空白か無効な値になっています。input:{}".format(character)
     import_file = "augmentation.augmenter"
     augmenter_module = importlib.import_module(import_file)
-    augmenter_module.augmenter(input_dir, output_dir, character)
+    augmenter_module.augmenter(input_dir)
 
 def run_resizer(input_dir, width, height):
     assert os.path.isdir(input_dir), "-inに指定されたディレクトリが見つかりません。input:{}".format(input_dir)
@@ -78,7 +76,7 @@ def main():
         run_trimmer(arguments["images_folder_path"], arguments["character"])
 
     elif arguments["func"] == "augmentation":
-        run_augmenter(arguments["input"], arguments["output"], arguments["character"])
+        run_augmenter(arguments["input"])
 
     elif arguments["func"] == "resize":
         run_resizer(arguments["input"], arguments["width"], arguments["height"])

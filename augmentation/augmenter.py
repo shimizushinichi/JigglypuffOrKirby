@@ -1,8 +1,12 @@
 import os
 from PIL import Image
 
-def augmenter(input_dir, output_dir, character):
-    output_dir = os.path.join(output_dir, character)
+def augmenter(input_dir):
+    if input_dir[-1] == "/":
+        input_dir = input_dir[:-1]
+    character = os.path.basename(input_dir)
+
+    output_dir = os.path.join("augmented", character)
     try:
         os.makedirs(output_dir)
     except FileExistsError:
