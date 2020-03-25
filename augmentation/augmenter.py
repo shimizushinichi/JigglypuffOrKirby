@@ -37,17 +37,18 @@ def shrink_rotate_and_save_img(file_list, input_dir, output_dir):
                 rotate_num = "_" + str((i+1) * 90)
                 shrinked_img.save(output_dir + "/" + basename + "_shrinked" + rotate_num + ext)
 
-def augmenter(input_dir):
-    if input_dir[-1] == "/":
-        input_dir = input_dir[:-1]
-    character = os.path.basename(input_dir)
+def augmenter(input_dirs):
+    for input_dir in input_dirs:
+        if input_dir[-1] == "/":
+            input_dir = input_dir[:-1]
+        character = os.path.basename(input_dir)
 
-    output_dir = os.path.join("augmented", character)
-    try:
-        os.makedirs(output_dir)
-    except FileExistsError:
-        pass
+        output_dir = os.path.join("augmented", character)
+        try:
+            os.makedirs(output_dir)
+        except FileExistsError:
+            pass
 
-    file_list = os.listdir(input_dir)
-    rotate_and_save_img(file_list, input_dir, output_dir)
-    shrink_rotate_and_save_img(file_list, input_dir, output_dir)
+        file_list = os.listdir(input_dir)
+        rotate_and_save_img(file_list, input_dir, output_dir)
+        shrink_rotate_and_save_img(file_list, input_dir, output_dir)

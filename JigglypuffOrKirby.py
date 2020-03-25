@@ -36,11 +36,12 @@ def run_trimmer(input_dir):
     trimmer_module = importlib.import_module(import_file)
     trimmer_module.trimmer(input_dir)
 
-def run_augmenter(input_dir):
-    assert os.path.isdir(input_dir), "-inに指定されたディレクトリが見つかりません。input:{}".format(input_dir)
+def run_augmenter(input_dirs):
+    for input_dir in input_dirs:
+        assert os.path.isdir(input_dir), "-indirsに指定されたディレクトリが見つかりません。input:{}".format(input_dir)
     import_file = "augmentation.augmenter"
     augmenter_module = importlib.import_module(import_file)
-    augmenter_module.augmenter(input_dir)
+    augmenter_module.augmenter(input_dirs)
 
 def run_resizer(input_dirs, width, height):
     for input_dir in input_dirs:
@@ -75,7 +76,7 @@ def main():
         run_trimmer(arguments["input"])
 
     elif arguments["func"] == "augmentation":
-        run_augmenter(arguments["input"])
+        run_augmenter(arguments["inputdirs"])
 
     elif arguments["func"] == "resize":
         run_resizer(arguments["inputdirs"], arguments["width"], arguments["height"])
