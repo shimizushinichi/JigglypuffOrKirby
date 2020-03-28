@@ -4,7 +4,7 @@ import os
 import importlib
 
 def user_input():
-    list_type = lambda x:list(x.split(","))
+    list_type = lambda x:list(x.split(" "))
 
     parser = argparse.ArgumentParser(description="JigglypuffOrKirbyの各種機能を実行するためのプログラムです。")
 
@@ -15,7 +15,7 @@ def user_input():
     parser.add_argument("-in", "--input", help="input folder path", type=str)
     parser.add_argument("-wid", "--width",help="width for output image", type=int)
     parser.add_argument("-hei", "--height",help="height for output image", type=int)
-    parser.add_argument("-indirs", "--inputdirs", help="Image folders. should be comma separated. e.g /aaa/bbb,ccc/ddd", type=list_type)
+    parser.add_argument("-indirs", "--inputdirs", help="Image folders. should be comma separated. e.g '/aaa/bbb ccc/ddd'", type=list_type)
     # parser.add_argument("", "", help="", type=str)
     # parser.add_argument("", "", help="", type=str)
     # parser.add_argument("", "", help="", type=str)
