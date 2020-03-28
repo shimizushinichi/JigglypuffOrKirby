@@ -12,10 +12,9 @@ def user_input():
         choices=["crawler", "trimming", "augmentation", "resize", "numpy_convert", "testdata_convert", "learn", "judge"])
     parser.add_argument("-s", "--site", help="website to crawl", type=str, default = "flickr", choices=["flickr"])
     parser.add_argument("-ch", "--character", help="Search word", type=str)
-    parser.add_argument("-in", "--input", help="input folder path", type=str)
     parser.add_argument("-wid", "--width",help="width for output image", type=int)
     parser.add_argument("-hei", "--height",help="height for output image", type=int)
-    parser.add_argument("-indirs", "--inputdirs", help="Image folders. should be comma separated. e.g '/aaa/bbb ccc/ddd'", type=list_type)
+    parser.add_argument("-in", "--inputdirs", help="Image folders. should be comma separated. e.g '/aaa/bbb ccc/ddd'", type=list_type)
     # parser.add_argument("", "", help="", type=str)
     # parser.add_argument("", "", help="", type=str)
     # parser.add_argument("", "", help="", type=str)
@@ -30,11 +29,12 @@ def run_crawler(site, character):
     crawler = crawler_module.ImageCrawler()
     crawler.get_images(character)
 
-def run_trimmer(input_dir):
-    assert os.path.isdir(input_dir), "-inに指定されたディレクトリが見つかりません。input:{}".format(input_dir)
+def run_trimmer(input_dirs):
+    for input_dir in input_dirs:
+        assert os.path.isdir(input_dir), "-indirsに指定されたディレクトリが見つかりません。input:{}".format(input_dir)
     import_file = "trimming.trimmer"
     trimmer_module = importlib.import_module(import_file)
-    trimmer_module.trimmer(input_dir)
+    trimmer_module.trimmer(input_dirs)
 
 def run_augmenter(input_dirs):
     for input_dir in input_dirs:
@@ -73,7 +73,7 @@ def main():
         run_crawler(arguments["site"], arguments["character"])
 
     elif arguments["func"] == "trimming":
-        run_trimmer(arguments["input"])
+        run_trimmer(arguments["inputdirs"])
 
     elif arguments["func"] == "augmentation":
         run_augmenter(arguments["inputdirs"])
