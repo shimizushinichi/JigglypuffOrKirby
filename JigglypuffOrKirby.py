@@ -36,13 +36,6 @@ def run_trimmer(input_dirs):
     trimmer_module = importlib.import_module(import_file)
     trimmer_module.trimmer(input_dirs)
 
-def run_augmenter(input_dirs):
-    for input_dir in input_dirs:
-        assert os.path.isdir(input_dir), "-indirsに指定されたディレクトリが見つかりません。input:{}".format(input_dir)
-    import_file = "augmentation.augmenter"
-    augmenter_module = importlib.import_module(import_file)
-    augmenter_module.augmenter(input_dirs)
-
 def run_resizer(input_dirs, width, height):
     for input_dir in input_dirs:
         assert os.path.isdir(input_dir), "-indirsに指定されたディレクトリが見つかりません。input:{}".format(input_dir)
@@ -51,6 +44,13 @@ def run_resizer(input_dirs, width, height):
     import_file = "resize.resizer"
     resizer_module = importlib.import_module(import_file)
     resizer_module.resizer(input_dirs, width, height)
+
+def run_augmenter(input_dirs):
+    for input_dir in input_dirs:
+        assert os.path.isdir(input_dir), "-indirsに指定されたディレクトリが見つかりません。input:{}".format(input_dir)
+    import_file = "augmentation.augmenter"
+    augmenter_module = importlib.import_module(import_file)
+    augmenter_module.augmenter(input_dirs)
 
 def run_numpy_converter(input_dirs):
     for input_dir in input_dirs:
@@ -75,11 +75,11 @@ def main():
     elif arguments["func"] == "trimming":
         run_trimmer(arguments["inputdirs"])
 
-    elif arguments["func"] == "augmentation":
-        run_augmenter(arguments["inputdirs"])
-
     elif arguments["func"] == "resize":
         run_resizer(arguments["inputdirs"], arguments["width"], arguments["height"])
+
+    elif arguments["func"] == "augmentation":
+        run_augmenter(arguments["inputdirs"])
 
     elif arguments["func"] == "numpy_convert":
         run_numpy_converter(arguments["inputdirs"])
