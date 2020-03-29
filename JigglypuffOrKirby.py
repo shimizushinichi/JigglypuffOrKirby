@@ -8,8 +8,8 @@ def user_input():
 
     parser = argparse.ArgumentParser(description="JigglypuffOrKirbyの各種機能を実行するためのプログラムです。")
 
-    parser.add_argument("func", help="crawler, trimming, augmentation, learn, or judge", type=str,
-        choices=["crawler", "trimming", "augmentation", "resize", "numpy_convert", "testdata_convert", "learn", "judge"])
+    parser.add_argument("func", help="crawler, trimming, augmentation, or judge", type=str,
+        choices=["crawler", "trimming", "augmentation", "resize", "numpy_convert", "testdata_convert", "judge"])
     parser.add_argument("-s", "--site", help="website to crawl", type=str, default = "flickr", choices=["flickr"])
     parser.add_argument("-ch", "--character", help="Search word", type=str)
     parser.add_argument("-wid", "--width",help="width for output image", type=int)
@@ -17,7 +17,6 @@ def user_input():
     parser.add_argument("-in", "--inputdirs", help="Image folders. should be comma separated. e.g '/aaa/bbb ccc/ddd'", type=list_type)
     parser.add_argument("-img", "--imagepath", help="An image path to be used by judge func.", type=str)
     parser.add_argument("-model", "--model", help="A model path to be used by judge func", type=str)
-    # parser.add_argument("", "", help="", type=str)
 
     args_namespace = parser.parse_args()
     arguments = vars(args_namespace)
@@ -93,7 +92,6 @@ def main():
 
     elif arguments["func"] == "testdata_convert":
         run_testdata_converter(arguments["inputdirs"])
-    # elif arguments["func"] == "learn":
 
     elif arguments["func"] == "judge":
         run_judge(arguments["imagepath"], arguments["model"])
