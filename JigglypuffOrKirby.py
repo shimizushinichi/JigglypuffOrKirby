@@ -15,8 +15,8 @@ def user_input():
     parser.add_argument("-wid", "--width",help="width for output image", type=int)
     parser.add_argument("-hei", "--height",help="height for output image", type=int)
     parser.add_argument("-in", "--inputdirs", help="Image folders. should be comma separated. e.g '/aaa/bbb ccc/ddd'", type=list_type)
-    # parser.add_argument("", "", help="", type=str)
-    # parser.add_argument("", "", help="", type=str)
+    parser.add_argument("-img", "--imagepath", help="An image path to be used by judge func.", type=str)
+    parser.add_argument("-model", "--model", help="A model path to be used by judge func", type=str)
     # parser.add_argument("", "", help="", type=str)
 
     args_namespace = parser.parse_args()
@@ -66,6 +66,13 @@ def run_testdata_converter(input_dirs):
     testdata_converter_module = importlib.import_module(import_file)
     testdata_converter_module.testdata_converter(input_dirs)
 
+def run_judge(image_path, model_path):
+    assert os.path.isfile(image_path), "-imgに指定されたファイルが見つかりません。input:{}".format(image_path)
+    assert os.path.isfile(model_path), "-modelに指定されたファイルが見つかりません。input:{}".format(model_path)
+    import_file = "judge.judge"
+    judge_module = importlib.import_module(import_file)
+    judge_module.judge(image_path, model_path)
+
 def main():
     arguments = user_input()
     t0 = time.time() # start the timer
@@ -87,7 +94,9 @@ def main():
     elif arguments["func"] == "testdata_convert":
         run_testdata_converter(arguments["inputdirs"])
     # elif arguments["func"] == "learn":
-    # elif arguments["func"] == "judge":
+
+    elif arguments["func"] == "judge":
+        run_judge(arguments["imagepath"], arguments["model"])
 
     t1 = time.time() # stop the timer
     total_time = t1 - t0
