@@ -8,13 +8,13 @@ def user_input():
 
     parser = argparse.ArgumentParser(description="JigglypuffOrKirbyの各種機能を実行するためのプログラムです。")
 
-    parser.add_argument("func", help="crawler, trimming, augmentation, or judge", type=str,
+    parser.add_argument("func", help="crawler, trimming, resize, augmentation, numpy_convert, testdata_convert or judge", type=str,
         choices=["crawler", "trimming", "augmentation", "resize", "numpy_convert", "testdata_convert", "judge"])
     parser.add_argument("-s", "--site", help="website to crawl", type=str, default = "flickr", choices=["flickr"])
     parser.add_argument("-ch", "--character", help="Search word", type=str)
     parser.add_argument("-wid", "--width",help="width for output image", type=int)
     parser.add_argument("-hei", "--height",help="height for output image", type=int)
-    parser.add_argument("-in", "--inputdirs", help="Image folders. should be comma separated. e.g '/aaa/bbb ccc/ddd'", type=list_type)
+    parser.add_argument("-in", "--inputdirs", help="Image folders. should be space separated. e.g '/aaa/bbb ccc/ddd'", type=list_type)
     parser.add_argument("-img", "--imagepath", help="An image path to be used by judge func.", type=str)
     parser.add_argument("-model", "--model", help="A model path to be used by judge func", type=str, default = "judge/model_jigglypufforkirby_forJudge.h5")
 
