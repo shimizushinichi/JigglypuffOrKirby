@@ -31,7 +31,7 @@ $ python3 JigglypuffOrKirby.py crawler -ch jigglypuff
 ```
 APIを使用してFlickrの画像を収集します。  
 実行場所にdownloadsというフォルダを作成して、収集した画像を保存します。  
-https://www.flickr.com/services/api/から登録をしてAPIキー(key, secret)を取得してください。  
+https://www.flickr.com/services/api/ から登録をしてAPIキー(key, secret)を取得してください。  
 flickrAPIkey.jsonというファイルを作成してJigglypuffOrKirby.pyと同じディレクトリに設置。  
 ファイルの内容は以下のように記述してください。
 
