@@ -1,9 +1,6 @@
 JigglypuffOrKirby
 ====
 
-![Jigglypuff](https://user-images.githubusercontent.com/23429755/78315857-2934e580-7599-11ea-8426-4365a110d5f0.png)
-![Kirby](https://user-images.githubusercontent.com/23429755/78315867-2df99980-7599-11ea-843c-12fe352d425c.png)
-
 プリンとカービィを見分けるAIを作成するために画像収集、各種加工を容易に行えるように作成したプログラムです。  
 こちらで作成したデータをGoogle Colab上で学習させることでモデルを作成します。  
 作成したモデルをこのプログラムに渡して使用することで画像の判定を行うこともできます。  
