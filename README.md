@@ -1,7 +1,7 @@
 JigglypuffOrKirby
 ====
-描いた絵がプリンっぽいかカービィっぽいか判別するサイト
-http://jigglypufforkirby.net:8080/
+描いた絵がプリンっぽいかカービィっぽいか判別するサイト  
+http://jigglypufforkirby.net:8080/  
 
 プリンとカービィを見分けるAIを作成するために画像収集、各種加工を容易に行えるように作成したプログラムです。  
 こちらで作成したデータをGoogle Colab上で学習させることでモデルを作成します。  
