@@ -1,5 +1,7 @@
 JigglypuffOrKirby
 ====
+こちらで作成したモデルを使用したデモサイトもございます。以下をご参照ください。
+https://github.com/shimizushinichi/JigglypuffOrKirby_Web
 
 プリンとカービィを見分けるAIを作成するために画像収集、各種加工を容易に行えるように作成したプログラムです。  
 こちらで作成したデータをGoogle Colab上で学習させることでモデルを作成します。  
